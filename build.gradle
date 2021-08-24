@@ -41,3 +41,8 @@ tasks.register("runServer"){
       }
   }
 }
+
+tasks.register("testPlugin"){
+	dependsOn jar
+	dependsOn runServer
+}
