@@ -10,9 +10,9 @@ sourceSets {
     }
  }
 
-group 'dzuchun.paper.testplugin'
-version '0.1-TEST'
-String workspace = 'git/Test-Plugin'
+group 'dzuchun.paper.slimeores'
+version '1.5-INDEV'
+String workspace = 'Documents/Pluginning/1.17/SlimeOres'
 
 repositories() {
     mavenCentral()
@@ -26,7 +26,7 @@ dependencies {
 jar {
     String userHome = System.properties['user.home']
     destinationDirectory = file("$userHome/$workspace/PaperServer/plugins")
-    archiveFileName = project.name + ".jar"
+    archiveFileName = project.name + "-" + version + ".jar"
 
     from {
     	fileTree("/src/").collect { it.isDirectory() ? it : zipTree(it) }
@@ -40,4 +40,9 @@ tasks.register("runServer"){
           executable "./runServer.sh"
       }
   }
+}
+
+tasks.register("testPlugin"){
+	dependsOn jar
+	dependsOn runServer
 }
